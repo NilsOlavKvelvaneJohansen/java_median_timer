@@ -1,0 +1,40 @@
+#! /usr/bin/python3
+
+
+import argparse
+import subprocess
+import sys
+import time
+
+
+
+parser = argparse.ArgumentParser(description='.')
+
+parser.add_argument('-j', '--java', type=str, nargs="+" , required=True)
+parser.add_argument("-n", '--number', type=str, nargs="+")
+args = parser.parse_args()
+
+
+
+bins = vars(args).get("java")
+nList = vars(args).get("number")
+out = {}
+
+for bin in bins:
+    out[bin] = []
+    for n in nList:
+        median_times = []
+        command = "java " + bin + " " + n
+        
+        #Add other arguments
+        command+=""
+        for i in range(7):
+            start = time.perf_counter()
+            subprocess.check_output(command.split(), stderr=subprocess.PIPE)
+            stop = time.perf_counter()
+            median_times.append(start-stop)
+        median_times.sort()
+        out[bin].append(median_times[3])
+
+print(out)
+
