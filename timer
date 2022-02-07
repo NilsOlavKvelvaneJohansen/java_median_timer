@@ -25,14 +25,14 @@ for bin in bins:
     for n in nList:
         median_times = []
         command = "java " + bin + " " + n
-        
+
         #Add other arguments
-        command+=""
+        command = command + " 20"
         for i in range(7):
             start = time.perf_counter()
             subprocess.check_output(command.split(), stderr=subprocess.PIPE)
             stop = time.perf_counter()
-            median_times.append(start-stop)
+            median_times.append(stop-start)
         median_times.sort()
         out[bin].append(median_times[3])
 
