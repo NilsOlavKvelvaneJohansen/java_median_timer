@@ -28,7 +28,7 @@ for bin in bins:
             time = subprocess.check_output(command.split(), stderr=subprocess.PIPE)
             median_times.append(time)
         median_times.sort()
-        out[bin].append(median_times[3])
+        out[bin].append({str(arg) : median_times[3]})
 
 print(out)
 
