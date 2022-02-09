@@ -1,6 +1,7 @@
 #! /usr/bin/python3
 
-
+import numpy as np
+import pandas as pd
 import argparse
 import subprocess
 
@@ -11,16 +12,16 @@ parser = argparse.ArgumentParser(description='.')
 
 parser.add_argument('-j', '--java', type=str, nargs="+" , required=True)
 parser.add_argument("-a", '--args', type=str, nargs="+")
+
 args = parser.parse_args()
-
-
 
 bins = vars(args).get("java")
 argList = vars(args).get("args")
-out = {}
+out = np.zeros((len(bins), len(argList)))
+x = 0
+y = 0
 
-for bin in bins:
-    out[bin] = []
+for bin in bins: 
     for arg in argList:
         median_times = []
         command = "java " + bin + " " + arg
@@ -28,7 +29,10 @@ for bin in bins:
             time = subprocess.check_output(command.split(), stderr=subprocess.PIPE)
             median_times.append(time)
         median_times.sort()
-        out[bin].append({str(arg) : median_times[3]})
+        out[x][y] = median_times[3]
+        x = x + 1
+    x = 0
+    y = y + 1
 
-print(out)
-
+df = pd.DataFrame(out, argList, bins)
+df.to_csv("results.csv")
