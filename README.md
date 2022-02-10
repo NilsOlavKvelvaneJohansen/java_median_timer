@@ -1,8 +1,10 @@
 # Automatic table generator for java programs in IN3030/IN4330  
 The purpose of this script is to run any number of java programs through several iterations and generate timing tables based on median values.  
+For this script to work your code needs to print its timing to stdout. This allows you to time only the part of the code you want to.
 The tables will be put in a csv file called report.csv
 
-**Usage:** python3 java\_median\_timer -j ... -n ...  
+**Usage:**  
+python3 java\_median\_timer -j ... -n ...  
 
 **Arguments:**  
 \-j[ava]        ...     : Required argument. Specifies which java programs to generate tables for.  
