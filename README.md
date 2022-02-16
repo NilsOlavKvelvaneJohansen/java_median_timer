@@ -3,7 +3,7 @@ The purpose of this script is to run any number of java programs through several
 For this script to work your code needs to print its timing to stdout. This allows you to time only the part of the code you want to.
 The tables will be put in a csv file called report.csv
 
-**Dependencies:**
+**Dependencies:**  
 Numpy: install with ```pip install numpy```  
 Pandas: install with ```pip install pandas```
   
