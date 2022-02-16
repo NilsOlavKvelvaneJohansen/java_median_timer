@@ -18,8 +18,8 @@ Results will be output in a file called results.xlsx
 \-a[rguments]   ...     : Required argument. A list of strings that specifies which arguments the java programs should be run with.
   
 **Example:**  
-python3 java\_median\_timer -j multicore singe\_core -a "10000 20" "100000 20"  
-This will generate timing tables for the java executables multicore and single\_core. Each java executable is first run with the arguments 10000 20 and then with 100000 20.
+python3 java\_median\_timer -j multi\_core singe\_core -a "10000 20" "100000 20"  
+This will generate timing tables for the java executables multi\_core and single\_core. Each java executable is first run with the arguments 10000 20 and then with 100000 20.
   
 **Future funcionality:**  
 - Add -o to allow user to specify output file    
