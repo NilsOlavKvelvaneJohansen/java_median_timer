@@ -29,11 +29,12 @@ for bin in bins:
         time = (str(time)[2:len(str(time))-3])
         time = str(time).split('\\n')
         time.sort()
-        out[y, x] = float(time[3])/1000
-        x = x + 1
-    x = 0
-    y = y + 1
+        out[x, y] = float(time[3])/1000
+        y = y + 1
+    y = 0
+    x = x + 1
 
 df = pd.DataFrame(out, bins, argList)
 df.to_excel("results.xlsx")
+print("Results.xlsx is create : )")
 
