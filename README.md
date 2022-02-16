@@ -1,17 +1,14 @@
 # Automatic table generator for java programs
 The purpose of this script is to run any number of java programs through several iterations and generate timing tables based on median values.  
-For this script to work your code needs to print its timing to stdout. This allows you to time only the part of the code you want to.
-The tables will be put in a csv file called report.csv
-
+For this script to work you will need to ensure that your java program runs the part you want to time seven times and prints the time taken every iteration. This is to ensure that the JIT compiler will take effect.  
+Results will be output in a file called results.xlsx  
+  
 **Dependencies:**  
 Numpy: install with ```pip install numpy```  
 Pandas: install with ```pip install pandas```
   
 **Usage:**  
 python3 java\_median\_timer -j ... -a ...  
-  
-For this script to work you will need to ensure that your java program runs the part you want to time seven times and prints the time taken every iteration. This is to ensure that the JIT compiler will take effect.
-Results will be output in a file called results.xlsx
   
 **Arguments:**  
 \-j[ava]        ...     : Required argument. Specifies which java programs to generate tables for.  
