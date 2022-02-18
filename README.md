@@ -6,6 +6,7 @@ Results will be output in a file called results.xlsx
 **Dependencies:**  
 Numpy: install with ```pip install numpy```  
 Pandas: install with ```pip install pandas```
+Openpyxl: install with ```pip install openpyxl```
   
 **Usage:**  
 python3 java\_median\_timer -j ... -a ...  
