@@ -9,14 +9,14 @@ Pandas: install with ```pip install pandas```
 Openpyxl: install with ```pip install openpyxl```
   
 **Usage:**  
-python3 java\_median\_timer -j ... -a ...  
+python3 timer -j ... -a ...  
   
 **Arguments:**  
 \-j[ava]        ...     : Required argument. Specifies which java programs to generate tables for.  
 \-a[rguments]   ...     : Required argument. A list of strings that specifies which arguments the java programs should be run with.
   
 **Example:**  
-python3 java\_median\_timer -j multi\_core singe\_core -a "10000 20" "100000 20"  
+python3 timer -j multi\_core singe\_core -a "10000 20" "100000 20"  
 This will generate timing tables for the java executables multi\_core and single\_core. Each java executable is first run with the arguments 10000 20 and then with 100000 20.
   
 **Future funcionality:**  
