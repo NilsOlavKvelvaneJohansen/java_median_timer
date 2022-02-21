@@ -6,9 +6,6 @@ import pandas as pd
 import argparse
 import subprocess
 
-TIMES = 7
-
-
 parser = argparse.ArgumentParser(description='.')
 
 parser.add_argument('-j', '--java', type=str, nargs="+" , required=True)
@@ -19,36 +16,39 @@ args = parser.parse_args()
 bins = vars(args).get("java")
 argList = vars(args).get("args")
 out = np.zeros((len(bins), len(argList)))
-speedup = np.zeros((len(bins), len(argList)-1))
+speedup = np.zeros((len(bins)-1, len(argList)))
+basetimes = np.zeros(len(argList))
+
 
 x = 0
 y = 0
 
+# Run each java program for each argument
 for bin in bins: 
     for arg in argList:
-        command = "java -Xmx6000m " + bin + " " + arg
+        command = "java " + bin + " " + arg
         time = subprocess.check_output(command.split(), stderr=subprocess.PIPE)
-        time = (str(time)[2:len(str(time))-3])
+        time = str(time)[2:len(str(time))-3]
         time = str(time).split('\\n')
         time.sort()
-        out[x, y] = float(time[3])/1000
-        if y == 0:
-            basetime = time[3]
+        median = float(time[len(time)//2])/1000
+        out[x, y] = median
+        if x == 0:
+            basetimes[y] = median
         else:
-            speedup[x, y-1] = basetime/time[3]
+            speedup[x-1, y] = median / basetimes[y]
         y = y + 1
-        print(bin, arg)
     y = 0
     x = x + 1
 
-
 df = pd.DataFrame(out, bins, argList)
-df.to_excel("results.xlsx")
+df.to_excel("results_2.xlsx", sheet_name="Time tables")
 
-argList.pop(0)
+bins.pop(0)
+if (len(bins) != 0):
+    df = pd.DataFrame(speedup, bins, argList)
+    df.to_excel("results.xlsx", sheet_name="Speedup tables")
 
-df = pd.DataFram(speedup, bins, argList)
-df.to_excel("results.xlsx", sheet_name="Speedup")
 
-print("Results.xlsx is create : )")
+print("Tables generated. Check results.xlsx")
 
