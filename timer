@@ -26,7 +26,7 @@ y = 0
 
 for bin in bins: 
     for arg in argList:
-        command = "java " + bin + " " + arg
+        command = "java -Xmx6000m " + bin + " " + arg
         time = subprocess.check_output(command.split(), stderr=subprocess.PIPE)
         time = (str(time)[2:len(str(time))-3])
         time = str(time).split('\\n')
@@ -37,6 +37,7 @@ for bin in bins:
         else:
             speedup[x, y-1] = basetime/time[3]
         y = y + 1
+        print(bin, arg)
     y = 0
     x = x + 1
 
