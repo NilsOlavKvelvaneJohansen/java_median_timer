@@ -38,6 +38,7 @@ for bin in bins:
         else:
             speedup[x-1, y] = median / basetimes[y]
         y = y + 1
+        print(bin, arg)
     y = 0
     x = x + 1
 
