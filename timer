@@ -19,6 +19,8 @@ args = parser.parse_args()
 bins = vars(args).get("java")
 argList = vars(args).get("args")
 out = np.zeros((len(bins), len(argList)))
+speedup = np.zeros((len(bins), len(argList)-1))
+
 x = 0
 y = 0
 
@@ -30,11 +32,22 @@ for bin in bins:
         time = str(time).split('\\n')
         time.sort()
         out[x, y] = float(time[3])/1000
+        if y == 0:
+            basetime = time[3]
+        else:
+            speedup[x, y-1] = basetime/time[3]
         y = y + 1
     y = 0
     x = x + 1
 
+
 df = pd.DataFrame(out, bins, argList)
 df.to_excel("results.xlsx")
+
+argList.pop(0)
+
+df = pd.DataFram(speedup, bins, argList)
+df.to_excel("results.xlsx", sheet_name="Speedup")
+
 print("Results.xlsx is create : )")
 
