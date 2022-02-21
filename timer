@@ -24,13 +24,14 @@ y = 0
 
 for bin in bins: 
     for arg in argList:
-        command = "java " + bin + " " + arg
+        command = "java -Xmx6000m " + bin + " " + arg
         time = subprocess.check_output(command.split(), stderr=subprocess.PIPE)
         time = (str(time)[2:len(str(time))-3])
         time = str(time).split('\\n')
         time.sort()
         out[x, y] = float(time[3])/1000
         y = y + 1
+        print(bin, arg)
     y = 0
     x = x + 1
 
